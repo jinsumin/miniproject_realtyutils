@@ -2,21 +2,37 @@ plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'war'
+    id 'war'//있어도 되나..?
 }
 
 group = 'org.hwaner'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+// 무슨 용도인지 확실히 알아보기
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    // 기본 세팅
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    // providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // 추가
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
